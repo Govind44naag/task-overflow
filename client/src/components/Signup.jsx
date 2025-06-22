@@ -37,9 +37,10 @@ const Signup = ({ onSwitchMode }) => {
     } catch (err) {
       console.error('Signup error', err);
       setMessage({
-        text: err.response?.data?.message || 'An error occurred. Please try again.',
-        type: 'error',
-      });
+  text: err.response?.data?.message || 'An error occurred. Please try again.',
+  type: 'error',
+});
+
     } finally {
       setLoading(false);
     }
@@ -47,6 +48,11 @@ const Signup = ({ onSwitchMode }) => {
 
   return (
     <div className='max-w-md w-full bg-white shadow-lg border border-purple-100 rounded-xl p-8'>
+
+   
+ 
+
+
       <div className='mb-6 text-center'>
         <div className='w-16 bg-gradient-to-br from-fuchsia-500 to-purple-500 rounded-full mx-auto flex items-center justify-center mb-4'>
           <UserPlus className='w-8 h-8 text-white' />

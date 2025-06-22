@@ -11,12 +11,17 @@ const createToken=(userId)=>jwt.sign({id:userId},JWT_SECRET,{expiresIn:TOKEN_EXP
 export async function registerUser(req,res){  
     
     const response=userSignupSchema.safeParse(req.body)
-    if(!response.success){
-        return res.json({
-        message:"User input is invalid",
-        success:false,
-        })
-    }
+    if (!response.success) {
+  const zodError = response.error.format();
+
+  // Extract the first error message (optional, you can also send all)
+  const firstError = Object.values(zodError).find((field) => field?._errors?.length > 0)?._errors[0];
+
+  return res.status(400).json({
+    message: firstError || "Invalid input data",
+    success: false,
+  });
+}
     const {name,email,password}=response.data
     //check  for email existance
     if(!validator.isEmail(email)){

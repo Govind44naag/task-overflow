@@ -10,7 +10,7 @@ const port=process.env.PORT || 4000
 
 app.use(express.json())
 app.use(cors({
-  origin: 'http://localhost:5173', // adjust to frontend origin
+  origin: 'https://task-overflow-pi.vercel.app', // adjust to frontend origin
   credentials: true,
   
 }));
@@ -26,5 +26,5 @@ app.get('/',(req,res)=>{
     res.send('api working')
 })
 app.listen(port,()=>{
-    console.log(`Server is running on port number http://localhost:${port}`)
+    console.log(`Server is running on port number https://task-overflow-pi.vercel.app`)
 })

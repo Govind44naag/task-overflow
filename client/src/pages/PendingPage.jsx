@@ -60,14 +60,14 @@ const PendingPage = () => {
             </div>
         </div>
       </div>
-      <div className={layoutClasses.addBox} onClick={()=>setShowModel(tru)}>
+      <div className={layoutClasses.addBox} onClick={()=>setShowModel(true)}>
         <div className='flex items-center justify-center gap-3 text-gray-500 group-hover:text-purple-600
         transition-colors'>
           <div className='w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm
           group-hover:shadow-md transition-all duration-200 '>
             <Plus className='text-purple-500' size={18} />
           </div>
-          <span className='font-medium'>
+          <span   className='font-medium'>
             Add New Task
           </span>
         </div>

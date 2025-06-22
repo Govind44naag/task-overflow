@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { UserPlus } from 'lucide-react';
+import { Eye, EyeOff, UserPlus } from 'lucide-react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 import {
   MESSAGE_ERROR,
   MESSAGE_SUCCESS,
@@ -13,9 +14,11 @@ import { API_USER } from '../utils/config';
 const INITIAL_FORM = { name: '', email: '', password: '' };
 
 const Signup = ({ onSwitchMode }) => {
+  const [showPassword,setShowPassword]=useState(false)
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: '', type: '' });
+  const navigate=useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +32,8 @@ const Signup = ({ onSwitchMode }) => {
         type: 'success',
       });
       setFormData(INITIAL_FORM);
+      navigate('/login')
+      
     } catch (err) {
       console.error('Signup error', err);
       setMessage({
@@ -68,6 +73,12 @@ const Signup = ({ onSwitchMode }) => {
               className='w-full focus:outline-none text-sm text-gray-700'
               required
             />
+             {showPassword && (
+                          <button type="button" onClick={()=>setShowPassword((prev)=>!prev)}
+                          className='ml-2 text-gray-500 hover:text-purple-500 transition-colors'>
+                            {showPassword ? <EyeOff className='w-5 h-5' /> : <Eye className='w-5 h-5'/>}
+                           </button>
+                        )}
           </div>
         ))}
 

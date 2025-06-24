@@ -58,64 +58,71 @@ const Navbar = ({user={},onLogout}) => {
       </button>
 
       {/* User Dropdown */}
-      <div ref={menuref} className='relative '>
+<div ref={menuref} className='relative'>
+  <button
+    onClick={handleMenuToggle}
+    className='flex items-center gap-2 bg-slate-500 px-3 py-2 rounded-full cursor-pointer
+      hover:bg-slate-400 transition duration-300 border border-transparent hover:border-purple-400 shadow-sm'
+  >
+    {/* Avatar */}
+    <div className='relative'>
+      {user.avatar ? (
+        <img src={user.avatar} alt='Avatar' className='w-9 h-9 rounded-full shadow-md' />
+      ) : (
+        <div className='w-9 h-9 flex items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white font-semibold shadow-md'>
+          {user.name?.[0]?.toUpperCase() || 'U'}
+        </div>
+      )}
+      {/* Status dot */}
+      <span className='absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white rounded-full animate-pulse' />
+    </div>
+
+    {/* Username and Email */}
+    <div className='hidden md:flex flex-col items-start max-w-[120px] truncate'>
+      <span className='text-sm font-medium text-white truncate'>{user.name}</span>
+      <span className='text-xs text-gray-200 truncate'>{user.email}</span>
+    </div>
+
+    {/* Chevron */}
+    <ChevronDown className={`w-4 h-4 text-white transition-transform duration-300 ${menuOpen ? 'rotate-180' : ''}`} />
+  </button>
+
+  {/* Dropdown Menu */}
+  {menuOpen && (
+    <ul
+      className='absolute top-14 right-0 w-60 bg-white rounded-xl shadow-2xl border border-purple-500 z-50 overflow-hidden animate-fadeIn'
+    >
+      {/* Profile Settings */}
+      <li>
         <button
-          onClick={handleMenuToggle}
-          className='flex items-center gap-2 bg-green-100 px-2 sm:px-3 py-2 rounded-full cursor-pointer 
-          hover:bg-purple-50 transition-colors duration-300 border border-transparent 
-          hover:border-purple-200'
+          onClick={() => {
+            setMenuOpen(false)
+            navigate('/profile')
+          }}
+          className='w-full px-5 py-3 text-left hover:bg-purple-50 text-sm text-gray-700 flex items-center gap-3 transition-colors'
         >
-          <div className='relative'>
-            {user.avatar ? (
-              <img src={user.avatar} alt='Avatar' className='w-8 h-8 sm:w-9 sm:h-9 rounded-full shadow-sm' />
-            ) : (
-              <div className='w-8 h-8 flex items-center justify-center rounded-full
-              bg-gradient-to-br from-fuchsia-500 to-purple-600 text-white font-semibold shadow-md'>
-                {user.name?.[0]?.toUpperCase() || 'U'}
-              </div>
-            )}
-            <div className='absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white animate-pulse' />
-          </div>
-
-          {/* Username (hide on small) */}
-          <div className='text-left hidden md:block'>
-            <p className='text-sm font-medium text-gray-800 truncate max-w-[100px]'>{user.name}</p>
-            <p className='text-xs text-gray-500 font-normal truncate max-w-[100px]'>{user.email}</p>
-          </div>
-
-          <ChevronDown className={`w-4 h-4 text-white transition-transform duration-300 ${menuOpen ? 'rotate-180' : ''}`} />
+          <Settings className='w-5 h-5 text-purple-600' />
+          <span>Profile Settings</span>
         </button>
+      </li>
 
-        {/* Dropdown Menu */}
-        {menuOpen && (
-          <ul className='absolute top-14 right-0 w-56 bg-white rounded-2xl shadow-xl border border-purple-500 z-50 overflow-hidden animate-fadeIn'>
-            <li className='p-2'>
-              <button
-                onClick={() => {
-                  setMenuOpen(false)
-                  navigate('/profile')
-                }}
-                className='w-full px-4 py-2.5 text-left hover:bg-purple-50 text-sm text-gray-700 
-                transition-colors flex items-center gap-2 group'
-                role='menuitem'
-              >
-                <Settings className='w-4 h-4 text-gray-700' />
-                Profile Setting
-              </button>
-            </li>
-            <li className='p-2'>
-              <button
-                onClick={handleLogout}
-                className='flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm 
-                hover:bg-red-50 text-red-600'
-              >
-                <LogOut className='w-4 h-4' />
-                Logout
-              </button>
-            </li>
-          </ul>
-        )}
-      </div>
+      {/* Divider */}
+      <div className='border-t border-gray-200 mx-2' />
+
+      {/* Logout */}
+      <li>
+        <button
+          onClick={handleLogout}
+          className='w-full px-5 py-3 text-left hover:bg-red-50 text-sm text-red-600 flex items-center gap-3 transition-colors'
+        >
+          <LogOut className='w-5 h-5' />
+          <span>Logout</span>
+        </button>
+      </li>
+    </ul>
+  )}
+</div>
+
     </div>
   </div>
 </header>

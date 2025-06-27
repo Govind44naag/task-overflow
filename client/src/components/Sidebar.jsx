@@ -159,7 +159,7 @@ const Sidebar = ({ user, tasks }) => {
                     <div>
                       <h3 className={TIP_CARD.title}>Pro Tip</h3>
                       <p className={TIP_CARD.text}>Use keyboard shortcuts to boost productivity!</p>
-                      <a href="https://placementportal-rho.vercel.app" target='_blank' rel="noreferrer" className='block mt-2 text-sm text-purple-500 hover:underline'>
+                      <a href="https://placement-portal-topaz-three.vercel.app/" target='_blank' rel="noreferrer" className='block mt-2 text-sm text-purple-500 hover:underline'>
                         Visit Job-Portal
                       </a>
                     </div>
